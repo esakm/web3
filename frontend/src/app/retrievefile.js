@@ -16,7 +16,7 @@ export default function GetFileButton() {
     };
 
     const handleSubmission = async (e) => {
-        var res = await fetch(`https://2th3w4lub7lrjo7cfzdn4qkrhi0ohsne.lambda-url.us-east-2.on.aws/files/${selectedFile}`)
+        var res = await fetch(`https://inbreyqxasqrzocs4hba6m7zpe0ixypu.lambda-url.us-east-1.on.aws/files/${selectedFile}`)
         var file = await res.json();
 
         var blob;
