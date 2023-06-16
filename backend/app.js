@@ -15,8 +15,8 @@ import { bootstrap } from '@libp2p/bootstrap'
 
 const app = express();
 const server = http.Server(app);
-const HOSTNAME = '127.0.0.1';
-const PORT = 5000;
+const HOSTNAME = '0.0.0.0';
+const PORT = 80;
 // start ipfs node
 const datastore = new MemoryDatastore()
 
