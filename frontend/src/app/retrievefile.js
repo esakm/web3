@@ -16,7 +16,7 @@ export default function GetFileButton() {
     };
 
     const handleSubmission = async (e) => {
-        var res = await fetch(`https://inbreyqxasqrzocs4hba6m7zpe0ixypu.lambda-url.us-east-1.on.aws/files/${selectedFile}`)
+        var res = await fetch(`http://3.13.253.48/files/${selectedFile}`)
         var file = await res.json();
 
         var blob;
@@ -25,9 +25,13 @@ export default function GetFileButton() {
             let addr = web3.eth.accounts.recover(file.data, file.signature);
             if (isConnected && addr !== address) {
                 return;
+            } else {
+                var bytes = Buffer.from(file.data, "base64");
+                console.log(bytes.toString("utf-8"))
+                blob = new Blob([bytes.buffer], { type: file.file_type });
             }
         } else if (file.enc) {
-            let privateKey = prompt("Enter private key");
+            let privateKey = prompt("Enter private key (format 0xfffffffffffff...");
             let publicKey = file.publicKey;
             let keyPair = new ethers.utils.SigningKey(privateKey);
 
@@ -51,6 +55,7 @@ export default function GetFileButton() {
             blob = new Blob([bytes.buffer], { type: file.file_type });
         } else {
             var bytes = Buffer.from(file.data, "base64");
+            console.log(bytes.toString("utf-8"))
             blob = new Blob([bytes.buffer], { type: file.file_type });
         }
         let d = document.getElementById("download");

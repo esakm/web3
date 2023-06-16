@@ -12,7 +12,6 @@ import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { webSockets } from '@libp2p/websockets'
 import { bootstrap } from '@libp2p/bootstrap'
-import serverless from 'serverless-http';
 
 const app = express();
 const server = http.Server(app);
@@ -96,5 +95,3 @@ app.get('/files/:cid', async (req, res) => {
     }
 
 })
-
-module.exports.handler = serverless(app);

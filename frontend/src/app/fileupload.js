@@ -24,7 +24,7 @@ export default function FileUploadButton() {
 
     const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
         onError(error) {
-            console.log("Error signing message");
+            console.log(error);
         },
         async onSuccess(data) {
             let requestBody = {
@@ -74,7 +74,7 @@ export default function FileUploadButton() {
                 requestBody.data = prehashedData;
             }
 
-            let response = await fetch("https://inbreyqxasqrzocs4hba6m7zpe0ixypu.lambda-url.us-east-1.on.aws/files", {
+            let response = await fetch("http://3.13.253.48/files", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function FileUploadButton() {
         reader.onload = function (e) {
             // using xhr since it was easy to track progress, but i was never really able to test this out.
             // my upload speed is too fast and the site slows down with big files since they take a while to read
-            xhr.open("POST", "https://inbreyqxasqrzocs4hba6m7zpe0ixypu.lambda-url.us-east-1.on.aws/files", true);
+            xhr.open("POST", "http://3.13.253.48/files", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             var binary = '';
             var bytes = new Uint8Array(e.target.result);
@@ -156,6 +156,8 @@ export default function FileUploadButton() {
         if (!isFilePicked) {
             return;
         }
+        setIsEncrypting(true);
+
         var reader = new FileReader();
         reader.onload = function (e) {
             var bytes = new Uint8Array(e.target.result);
@@ -163,8 +165,6 @@ export default function FileUploadButton() {
             setPreHashedData(message);
             signMessage({ message: message });
         };
-
-        setIsEncrypting(true);
         reader.readAsArrayBuffer(selectedFile);
     };
 
