@@ -1,5 +1,4 @@
 "use client"
-
 import FileUploadButton from './fileupload.js'
 import GetFileButton from './retrievefile.js'
 import Web3Connection from './wallet.js'
