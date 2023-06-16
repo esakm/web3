@@ -74,7 +74,7 @@ export default function FileUploadButton() {
                 requestBody.data = prehashedData;
             }
 
-            let response = await fetch("http://3.13.253.48/files", {
+            let response = await fetch("https://2th3w4lub7lrjo7cfzdn4qkrhi0ohsne.lambda-url.us-east-2.on.aws/files", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function FileUploadButton() {
         reader.onload = function (e) {
             // using xhr since it was easy to track progress, but i was never really able to test this out.
             // my upload speed is too fast and the site slows down with big files since they take a while to read
-            xhr.open("POST", "http://3.13.253.48/files", true);
+            xhr.open("POST", "https://2th3w4lub7lrjo7cfzdn4qkrhi0ohsne.lambda-url.us-east-2.on.aws/files", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             var binary = '';
             var bytes = new Uint8Array(e.target.result);
