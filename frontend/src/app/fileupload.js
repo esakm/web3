@@ -35,6 +35,9 @@ export default function FileUploadButton() {
             };
 
             if (isEncrypting) {
+                setIsEncrypting(false);
+                setPreHashedData(null);
+                
                 let arrayify = ethers.utils.arrayify;
                 let messageHash = arrayify(ethers.utils.hashMessage(prehashedData));
 
@@ -67,8 +70,7 @@ export default function FileUploadButton() {
                 requestBody.iv = Buffer.from(iv).toString("base64");
                 requestBody.publicKey = newAccountKeyPair.publicKey;
 
-                setIsEncrypting(false);
-                setPreHashedData(null);
+                
             } else {
                 requestBody.signature = data;
                 requestBody.data = prehashedData;
@@ -109,7 +111,6 @@ export default function FileUploadButton() {
             // my upload speed is too fast and the site slows down with big files since they take a while to read
             xhr.open("POST", "http://3.13.253.48/files", true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            var binary = '';
             var bytes = new Uint8Array(e.target.result);
             const data = {
                 name: selectedFile.name,
